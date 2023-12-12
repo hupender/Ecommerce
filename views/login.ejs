@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/login_style.css">
+    <title>Commercial Website</title>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Commercial Website</h1>
+        <section class="loginPage">
+            <!-- <h1>Sign in to Commercial Website</h1> -->
+            <form action="/" method="post">
+                <input type="email" name="email" id="" placeholder="Email" class="input">
+                <input type="password" name="password" id="" placeholder="Password" class="input">
+                <% if(locals.passCheck) { %>
+                    <p class="passMsg"> <%= passCheck %> </p>
+                <% } %>
+                <button type="submit">Log in</button>
+            </form>
+            <a href="/">Forgot Passoword?</a>
+            <hr>
+            <form action="/signup" method="get">
+                <!-- we can submit the form from js using form.submit -->
+                <button type="submit" id="signUp">Sign up</button>
+            </form>
+        </section>
+    </div>
+    <script src="/scripts/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/login_style.css">
+    <title>Commercial Website</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Commercial Website</h1>
+        <section class="loginPage">
+            <form action="/signup" method="post">
+                <input type="text" name="name" id="" placeholder="Enter Name" class="input">
+                <input type="email" name="email" id="" placeholder="Email address" class="input">
+                <input type="password" name="password" id="" placeholder="Enter password" class="input">
+                <input type="password" name="confirmPassword" id="" placeholder="Confirm password" class="input">
+                <% if(locals.passMsg) {%>
+                    <p class="passMsg"><%= passMsg %></p>
+                <% } %>
+                <button type="submit">Sign up</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
