@@ -99,6 +99,10 @@ app.post("/signup",async(req,res)=> {
     }
 });
 
+app.get("/forgot_password",function(req,res) {
+    res.render(__dirname + "/views/forgot_pass.ejs");
+}); 
+
 app.listen(`${port}`,function(){
     console.log(`Server started on port ${port}`);
 });

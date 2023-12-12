@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/forgot_pass.css">
+    <title>Commercial Website</title>
+</head>
+<body>
+    <div>
+        <h3>Trouble logging in</h3> 
+        <hr>
+        <p>Enter your email address to search your account</p>
+        <form action="/get_otp" method="post">
+            <input type="email" name="email" placeholder="Email address" class="input">
+            <hr>
+            <% if(locals.status) { %>
+                <p> <%= status %> </p>
+            <% } %>
+            <button type="submit">Send Otp</button>
+        </form>
+    </div>
+</body>
+</html>
