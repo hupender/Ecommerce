@@ -3,11 +3,14 @@ import bodyParser from "body-parser";
 import mongoose, { Schema } from "mongoose";
 import pkg from 'validator';
 import nodemailer from "nodemailer";
+import session from "express-session";
+import cookieParser from "cookie-parser";
 const {isEmail} = pkg;
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { error } from "console";
+import { log } from "util";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -17,9 +20,18 @@ app.use(express.static("public"));
 const port=3000;
 
 // use session to store the email in session 
+app.use(cookieParser("email"));
 app.use(session({
-    email:"mail"
+  resave:true,
+  saveUninitialized:true,
+  secret:"it's a secret",
+  cookie:{maxAge:3600000*1},
+  email:"email"
 }));
+
+// app.use(session({
+//     email:"mail"
+// }));    
 
 // Configure Nodemailer
 //  app password niikfqytlhzcavxr
@@ -50,7 +62,10 @@ var userDataSchema= new mongoose.Schema({
             },
         trim: true
     },
-    otp: Number
+    otp: {
+        type: Number,
+        expireAfterSeconds:600
+    }
 });
 userDataSchema.index({"email":"text"});
 const user=mongoose.model("user",userDataSchema);
@@ -105,7 +120,8 @@ app.post("/signup",async(req,res)=> {
             } catch(error) {
                 console.error("Error saving document: ",error);
             }
-            res.send("Open content");
+            res.render(__dirname + "/views/login.ejs");
+            // res.send("Open content");
         }
         else {
             res.render(__dirname + "/views/signup.ejs",{  
@@ -130,7 +146,9 @@ app.post("/forgot_password",async(req,res)=> {
     if(result) {
         // if acocunt exists then send an email to the user
         var otp=Math.floor(100000 + Math.random()*900000);
-        result.otp=otp;
+        const updateResult=await user.updateOne({email:email},{$set:{   
+            otp:otp
+        }});
         var mailDetails= {
             from: "hupenderkhatod@gmail.com",
             to: email,
@@ -143,10 +161,11 @@ app.post("/forgot_password",async(req,res)=> {
                 return res.status(500).send({ success: false, message: 'Error sending OTP email.' });
             }
             else {
-                res.session.email=email;
-                res.send({success:true,message:"Otp sent Successfully"});
+                var userEmail={email:email};
+                req.session.userData=userEmail;
+                res.render(__dirname + "/views/verify_otp.ejs");
             }
-        })
+        });
     }
     else {
         res.render(__dirname + "/views/forgot_pass.ejs",{
@@ -157,13 +176,15 @@ app.post("/forgot_password",async(req,res)=> {
 
 app.post("/verify_otp",async(req,res)=> {
     var input_otp=req.body.otp;
-    var session_mail=req.session.email;
+    var session_mail=req.session.userData.email;
     var result= await user.findOne({email:session_mail});
     if(input_otp==result.otp) {
         res.send("You can reset your password now");
     }
     else {
-        res.send("Wrong Otp");
+        res.render(__dirname + "/views/verify_otp.ejs",{
+            validation:"Invalid OTP",
+        });
     }
 });
 

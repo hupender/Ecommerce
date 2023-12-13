@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/verify_otp.css">
+    <title>Commercial Website</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Enter Otp to complete verification</h1>
+        <hr>
+        <form action="/verify_otp" method="post">
+            <input type="number" name="otp" placeholder="Enter OTP" class="input">
+            <% if(locals.validation) { %>
+                <p> <%= validation %> </p>
+            <% } %>
+            <hr>
+            <button type="submit">Verify</button>
+        </form>
+    </div>
+</body>
+</html>
