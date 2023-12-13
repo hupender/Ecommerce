@@ -179,7 +179,7 @@ app.post("/verify_otp",async(req,res)=> {
     var session_mail=req.session.userData.email;
     var result= await user.findOne({email:session_mail});
     if(input_otp==result.otp) {
-        res.send("You can reset your password now");
+        res.render(__dirname + "/views/reset_pass.ejs");
     }
     else {
         res.render(__dirname + "/views/verify_otp.ejs",{
@@ -187,6 +187,40 @@ app.post("/verify_otp",async(req,res)=> {
         });
     }
 });
+
+app.post("/new_password",async(req,res)=> {
+    var pass=req.body.password;
+    var confirmPass=req.body.confirmPassword;
+    if(pass && confirmPass) {
+        if(pass==confirmPass) {
+            if(pass.length>=8) {
+                try{
+                    await user.updateOne({email:req.session.userData.email},{$set:{
+                        password:pass
+                    }});
+                    res.render(__dirname + "/views/login.ejs");
+                } catch(error) {
+                    console.log(error);
+                }
+            }
+            else {
+                res.render(__dirname + "/views/reset_pass.ejs",{
+                    errorMsg:"Passwords should atleast have 8 characters.",
+                });
+            }
+        }
+        else {
+            res.render(__dirname + "/views/reset_pass.ejs",{
+                errorMsg:"Passwords do not match",
+            });
+        }
+    }
+    else {
+        res.render(__dirname + "/views/reset_pass.ejs",{
+            errorMsg:"All fields are Mandatory",
+        });
+    }
+})
 
 app.listen(`${port}`,function(){
     console.log(`Server started on port ${port}`);

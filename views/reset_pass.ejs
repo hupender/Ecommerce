@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/reset_pass.css">
+    <title>Commercial Website</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Enter New Password</h1>
+        <form action="/new_password" method="post">
+            <input type="password" name="password" class="input" placeholder="Enter Password">
+            <input type="password" name="confirmPassword" class="input" placeholder="Confirm Password">
+            <hr>
+            <% if(locals.errorMsg) { %>
+                <p> <%= errorMsg %> </p>
+            <% } %>
+            <button type="submit">Confirm</button>
+        </form>
+    </div>
+</body>
+</html>
