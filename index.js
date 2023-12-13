@@ -3,7 +3,8 @@ import bodyParser from "body-parser";
 import mongoose, { Schema } from "mongoose";
 import pkg from 'validator';
 import nodemailer from "nodemailer";
-import session from "express-session";
+// import session from "express-session";
+import session from "cookie-session";
 import cookieParser from "cookie-parser";
 const {isEmail} = pkg;
 
