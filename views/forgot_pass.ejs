@@ -11,11 +11,11 @@
         <h3>Trouble logging in</h3> 
         <hr>
         <p>Enter your email address to search your account</p>
-        <form action="/get_otp" method="post">
+        <form action="/forgot_password" method="post">
             <input type="email" name="email" placeholder="Email address" class="input">
             <hr>
             <% if(locals.status) { %>
-                <p> <%= status %> </p>
+                <p id="res"> <%= status %> </p>
             <% } %>
             <button type="submit">Send Otp</button>
         </form>
