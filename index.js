@@ -44,7 +44,7 @@ const transporter = nodemailer.createTransport({
     },
   });
 
-mongoose.connect("mongodb://localhost:27017/userData");
+mongoose.connect("mongodb://0.0.0.0:27017/userData");
 var userDataSchema= new mongoose.Schema({
     name: String,
     email: {
