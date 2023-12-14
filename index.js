@@ -44,7 +44,10 @@ const transporter = nodemailer.createTransport({
     },
   });
 
-mongoose.connect("mongodb://127.0.0.1:27017/userData");
+//   mongodb+srv://hupenderkhatod:Hupender%40123@cluster0.yl15wtm.mongodb.net/
+const Url="mongodb+srv://hupenderkhatod:Hupender%40123@cluster0.yl15wtm.mongodb.net/";
+mongoose.connect(Url);
+// mongoose.connect("mongodb://127.0.0.1:27017/userData");
 var userDataSchema= new mongoose.Schema({
     name: String,
     email: {
