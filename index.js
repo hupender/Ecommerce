@@ -1,5 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
+import session from "cookie-session";
+import cookieParser from "cookie-parser";
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -17,6 +19,16 @@ const app=express();
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 const port=3000;
+
+// use session to store the email in session 
+app.use(cookieParser());
+app.use(session({
+  resave:true,
+  saveUninitialized:true,
+  secret:"it's a secret",
+  cookie:{maxAge:3600000*1},
+  email:"email"
+}));
 
 app.get("/",loginRoute.login_get);
 app.post("/",loginRoute.login_post);

@@ -28,17 +28,18 @@ const forgotPass_post = async(req,res)=> {
             subject: "Otp for password reset",
             text: `Your otp for password change is ${otp}`,
         }
-        transporter.sendMail(mailDetails,function(error,info) {
-            if(error) {
-                console.error(error);
-                return res.status(500).send({ success: false, message: 'Error sending OTP email.' });
-            }
-            else {
-                var userEmail={email:email};
-                req.session.userData=userEmail;
-                res.render("verify_otp.ejs");
-            }
-        });
+        if(!req.session) {
+            console.log("uninitialised");
+            req.session={};
+        }
+        try {
+            transporter.sendMail(mailDetails);
+            var userEmail={email:email};
+            req.session.userData=userEmail;
+            res.render("verify_otp.ejs");
+        } catch(error) {
+            console.error(error);
+        }
     }
     else {
         res.render("forgot_pass.ejs",{
