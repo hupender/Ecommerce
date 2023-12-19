@@ -29,4 +29,18 @@ var userDataSchema= new mongoose.Schema({
 userDataSchema.index({"email":"text"});
 const user=mongoose.model("user",userDataSchema);
 
+var inventorySchema = new mongoose.Schema({
+    name : String,
+    price : Number,
+    email: {
+        type: String,
+        required: true,
+        lowercase: true,
+        unique: true,
+        validate: [isEmail,'Enter a valid email']
+    }
+});
+inventorySchema.index({"email":"text"});
+const material=mongoose.model("materail",inventorySchema);
+
 export default user;
