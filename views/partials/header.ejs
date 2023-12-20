@@ -29,9 +29,17 @@
                 </form>
             </div>
             <div>
-                <form action="" method="get">
-                    <button type="submit" class="btn">Become a Seller </button>
-                </form>
+                <% if(locals.msg) { %>
+                    <% if(msg=="isSeller") { %>
+                        <form action="/seller" method="get">
+                            <button type="submit" class="btn">Seller Utils</button>
+                        </form>
+                    <% }else { %>
+                        <form action="/become_seller" method="get">
+                            <button type="submit" class="btn">Become a Seller</button>
+                        </form>
+                    <% } %>
+                <% } %>
             </div>
         </div>
 

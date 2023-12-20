@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 
 import user from "./schema.js"
+import seller from "./seller_schema.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -22,7 +23,17 @@ const login_post = async(req,res)=> {
     // console.log(result);
     if(email && pass) {
         if(result && result.password==pass) {
-            res.redirect("/home");
+            const is_Seller= await seller.findOne({email:email});
+            if(is_Seller) {
+                res.render("home.ejs",{
+                    msg: "isSeller",
+                });
+            }
+            else {
+                res.render("home.ejs",{
+                    msg : "not_seller",
+                });
+            }
         }
         else {
             res.render("login.ejs",{

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/login_style.css">
+    <title>Commercial Website</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Become a Seller</h1>
+        <section class="loginPage">
+            <form action="/sellerSignup" method="post">
+                <input type="number" name="aadhar" id="" placeholder="Enter Your Adhaar Number" class="input">
+                <input type="text" name="gstNo" id="" placeholder="Enter Your GST Number" class="input">
+                <input type="text" name="pan" id="" placeholder="Enter Your Pan Number" class="input">
+                <% if(locals.passMsg) {%>
+                    <p class="passMsg"><%= passMsg %></p>
+                <% } %>
+                <button type="submit">Become a Seller</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
