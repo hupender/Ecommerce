@@ -24,6 +24,8 @@ const login_post = async(req,res)=> {
     if(email && pass) {
         if(result && result.password==pass) {
             const is_Seller= await seller.findOne({email:email});
+            var userEmail={email:email};
+            req.session.userData=userEmail;
             if(is_Seller) {
                 res.render("home.ejs",{
                     msg: "isSeller",

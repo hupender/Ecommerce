@@ -14,7 +14,7 @@ import * as forgotPassRoute from "./src/forget_pass.js";
 import verifyOtp from "./src/verify_otp.js";
 import newPass from "./src/new_pass.js";
 import homeRoute from "./src/home.js";
-import * as become_seller from "./src/become_seller.js"
+import * as become_seller from "./src/become_seller.js";
 
 const app=express();
 app.use(bodyParser.urlencoded({extended:true}));
@@ -47,6 +47,7 @@ app.post("/new_password",newPass);
 app.get("/home",homeRoute);
 
 app.get("/become_seller",become_seller.sellerSignUp_get);
+app.post("/become_seller",become_seller.sellerSignUp_post);
 
 app.listen(port,function(){
     console.log(`Server started on port ${port}`);
