@@ -1,8 +1,7 @@
 import express from "express";
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
-import products from "./category_schema.js";
-import { privateEncrypt } from "crypto";
+import products from "./product_schema.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -31,32 +30,16 @@ const addProducts_post = async(req,res)=> {
                 });
             }
         }
-        var found= await products.findOne({name:product_name , brand:brand});
-        if(found) {
-            await products.updateOne({name:product_name , brand:brand},{$set:{
-                $push:{
-                    seller: {
-                        email:req.session.userData.email,
-                        price:price,
-                        quantity:quantity
-                    }
-                }
-            }});
-        }
-        else {
-            const newProduct = new products({
-                _id: product_id,
-                name: product_name,
-                brand: brand,
-                category: category,
-                seller : {
-                    email:req.session.userData.email,
-                    price:price,
-                    quantity:quantity
-                }
-            });
-            await newProduct.save();
-        }
+        const newProduct = new products({
+            _id: product_id,
+            name: product_name,
+            brand: brand,
+            category: category,
+            seller_email:req.session.userData.email,
+            price:price,
+            quantity:quantity
+        });
+        await newProduct.save();
         res.send("successfully added");
     }
     else {
