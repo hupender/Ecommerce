@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/add_product.css">
+    <title>Inventory</title>
+</head>
+<body>
+  <div class="container">
+    <h1>ADD Products</h1>
+    <section class="AddProduct">
+        <form action="/add_products" method="post">
+            <input type="text" name="name" id="" placeholder="Enter Product Name" class="input">
+            <input type="number" name="price" id="" placeholder="Enter Price" class="input">
+            <input type="number" name="quantity" id="" placeholder="Enter quantity" class="input">
+            <input type="text" name="brand" id="" placeholder="Enter Brand" class="input">
+            <select id="category" name="category" class="input">
+                <option value="grocery">Grocery</option>
+                <option value="electronics">Electronics</option>
+                <option value="clothes">Clothes</option>
+                <option value="other">Other</option>
+            </select>
+            <div id="other" class="input hidden">
+                <label for="otherCategory">Specify Category:</label>
+                <input type="text" id="otherCategory" name="otherCategory">
+            </div>
+            
+            <p class="passMsg"></p>
+            <button type="submit">ADD</button>
+        </form>
+    </section>
+  </div>
+  <script src="/scripts/add_products.js"></script> 
+</body>
+</html>
