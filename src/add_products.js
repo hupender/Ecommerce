@@ -31,7 +31,7 @@ const addProducts_post = async(req,res)=> {
             }
         }
         const newProduct = new products({
-            _id: product_id,
+            id: product_id,
             name: product_name,
             brand: brand,
             category: category,

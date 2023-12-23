@@ -10,7 +10,7 @@ const category_schema = mongoose.Schema({
         id: Number
     }]
 });
-
+category_schema.index({category:1});
 const categorySchema = mongoose.model("categorySchema",category_schema);
 
 export default categorySchema;  

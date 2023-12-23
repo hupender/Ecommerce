@@ -5,7 +5,7 @@ body {
 }
 
 .site-header {
-    background-color: #333;
+    background-color: #fff;
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -20,6 +20,7 @@ body {
 .logo h1 {
     margin: 0;
     font-size: 1.5em;
+    color: #333;
 }
 
 form {
@@ -81,3 +82,32 @@ form {
         display: block;
     }
 }
+
+.category-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    margin: 20px 10%;
+}
+
+.category {
+    text-align: center;
+    padding: 10px;
+}
+
+.category img {
+    width: 100%; /* Make the images fill the container */
+    max-width: 100px; /* Set a maximum width to ensure responsiveness */
+    height: auto; /* Maintain aspect ratio */
+    /* border-radius: 50%; Make the images circular */
+}
+
+/* Add media query for responsiveness */
+@media only screen and (max-width: 600px) {
+    .category-container {
+        flex-direction: column; /* Stack items vertically on small screens */
+    }
+}
+

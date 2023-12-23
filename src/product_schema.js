@@ -6,7 +6,7 @@ mongoose.connect("mongodb+srv://hupenderkhatod:Hupender%40123@cluster0.yl15wtm.m
 
 // we can increase the id by 1 for each entry in the database
 const productsSchema = mongoose.Schema({
-    _id: Number,
+    id: Number,
     name: String,
     brand: String,
     rating: Number,
@@ -15,7 +15,7 @@ const productsSchema = mongoose.Schema({
     price: String,
     quantity: Number
 });
-productsSchema.index({_id:1});
+productsSchema.index({id:1});
 const products = mongoose.model("products",productsSchema);
 
 export default products;
