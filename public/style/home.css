@@ -97,7 +97,7 @@ form {
     padding: 10px;
 }
 
-.category img {
+.category-image {
     width: 100%; /* Make the images fill the container */
     max-width: 100px; /* Set a maximum width to ensure responsiveness */
     height: auto; /* Maintain aspect ratio */

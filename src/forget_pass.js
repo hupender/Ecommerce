@@ -28,6 +28,7 @@ const forgotPass_post = async(req,res)=> {
             subject: "Otp for password reset",
             text: `Your otp for password change is ${otp}`,
         }
+        console.log(mailDetails);
         if(!req.session) {
             console.log("uninitialised");
             req.session={};
